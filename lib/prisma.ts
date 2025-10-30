@@ -31,8 +31,7 @@ export const prisma =
     log: ['error', 'warn'],
     datasources: {
       db: {
-        url: databaseUrl,
-        directUrl: directDatabaseUrl
+        url: databaseUrl
       }
     }
   });
