@@ -5,7 +5,7 @@ const globalForPrisma = globalThis as unknown as { prisma: PrismaClient | undefi
 const FALLBACK_SUPABASE_URL =
   'postgresql://postgres:dragos1234dragos@db.dhkdtbflsmejpbjtcobg.supabase.co:5432/postgres';
 
-const databaseUrl =
+let databaseUrl =
   process.env.DATABASE_URL ??
   process.env.SUPABASE_DB_URL ??
   process.env.POSTGRES_PRISMA_URL ??
@@ -13,11 +13,19 @@ const databaseUrl =
   process.env.POSTGRES_URL_NON_POOLING ??
   `${FALLBACK_SUPABASE_URL}?pgbouncer=true&sslmode=require`;
 
-const directDatabaseUrl =
+if (!databaseUrl || databaseUrl.startsWith('file:')) {
+  databaseUrl = `${FALLBACK_SUPABASE_URL}?pgbouncer=true&sslmode=require`;
+}
+
+let directDatabaseUrl =
   process.env.DIRECT_URL ??
   process.env.SUPABASE_DIRECT_URL ??
   process.env.POSTGRES_URL_NON_POOLING ??
   FALLBACK_SUPABASE_URL;
+
+if (!directDatabaseUrl || directDatabaseUrl.startsWith('file:')) {
+  directDatabaseUrl = FALLBACK_SUPABASE_URL;
+}
 
 if (!databaseUrl) {
   throw new Error(
