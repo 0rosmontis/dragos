@@ -12,9 +12,10 @@ Follow these steps to run Dragos against a managed Supabase Postgres database.
    - Example: `postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres?sslmode=require`.
 
 3. **Local development**
-   - Update `.env` with the Supabase URI:
+   - Update `.env` with the Supabase URI (use the **pooled** string for `DATABASE_URL`, and optionally the non-pooled string for `DIRECT_URL` if you prefer Prisma to run migrations against a direct connection):
      ```env
-     DATABASE_URL="postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres?sslmode=require"
+     DATABASE_URL="postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres?pgbouncer=true&sslmode=require"
+     DIRECT_URL="postgresql://postgres:<password>@db.<ref>.supabase.co:5432/postgres?sslmode=require"
      ```
    - Regenerate the Prisma client:
      ```bash
