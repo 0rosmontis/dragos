@@ -1,19 +1,23 @@
-import Redis from 'ioredis';
+import { Redis } from '@upstash/redis';
 
 declare global {
   // eslint-disable-next-line no-var
-  var _redisClient: Redis | null | undefined;
+  var _upstashRedis: Redis | null | undefined;
 }
 
-const redisUrl = process.env.REDIS_URL;
+const redisUrl = process.env.UPSTASH_REDIS_REST_URL;
+const redisToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
 const redisClient =
-  redisUrl !== undefined && redisUrl.length > 0
-    ? globalThis._redisClient ?? new Redis(redisUrl, { enableAutoPipelining: true })
+  redisUrl && redisToken
+    ? globalThis._upstashRedis ?? new Redis({
+        url: redisUrl,
+        token: redisToken
+      })
     : null;
 
 if (redisClient && process.env.NODE_ENV !== 'production') {
-  globalThis._redisClient = redisClient;
+  globalThis._upstashRedis = redisClient;
 }
 
 export const redis = redisClient;

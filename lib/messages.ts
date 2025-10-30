@@ -18,7 +18,7 @@ export async function getRecentMessages(recipientEmail: string): Promise<Message
   const cacheKey = redisKey(['messages', 'recent', recipientEmail]);
 
   if (redis) {
-    const cached = await redis.get(cacheKey);
+    const cached = await redis.get<string>(cacheKey);
     if (cached) {
       const parsed = JSON.parse(cached) as CachedMessage[];
       return hydrateCachedMessages(parsed);
@@ -37,7 +37,7 @@ export async function getRecentMessages(recipientEmail: string): Promise<Message
       createdAt: message.createdAt.toISOString()
     }));
 
-    await redis.set(cacheKey, JSON.stringify(payload), 'EX', RECENT_MESSAGES_TTL_SECONDS);
+    await redis.set(cacheKey, JSON.stringify(payload), { ex: RECENT_MESSAGES_TTL_SECONDS });
   }
 
   return messages;
