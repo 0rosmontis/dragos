@@ -91,9 +91,9 @@ export function SignUpForm() {
         ) : null}
       </div>
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
-      {success ? <p className="text-sm text-emerald-400">Account created! Redirecting…</p> : null}
+      {success ? <p className="text-sm text-emerald-400">Account created! Redirecting...</p> : null}
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? 'Creating account…' : 'Sign up'}
+        {isSubmitting ? 'Creating account...' : 'Sign up'}
       </Button>
     </form>
   );

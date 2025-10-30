@@ -23,13 +23,13 @@ export default function HomePage() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <Button asChild>
-            <Link href="/send-message" className="inline-flex items-center gap-2">
-              Start messaging
+            <Link href="/chat" className="inline-flex items-center gap-2">
+              Open chat workspace
               <ArrowRight className="h-4 w-4" />
             </Link>
           </Button>
           <Button asChild variant="ghost">
-            <Link href="/me">Go to my dashboard</Link>
+            <Link href="/send-message">Send quick anonymous note</Link>
           </Button>
         </div>
       </section>

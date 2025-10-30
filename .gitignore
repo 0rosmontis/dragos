@@ -23,6 +23,9 @@
 
 # Prisma
 prisma/generated
+prisma/*.db
+prisma/**/*.db
+prisma/**/*.db-journal
 
 # Logs
 npm-debug.log*

@@ -1,0 +1,67 @@
+# Dragos realtime signal server (WebRTC signaling) setup
+
+1. SSH into your VPS.
+
+```
+ssh your-user@your-vps-ip
+```
+
+2. Install Node.js 20 LTS and git.
+
+```
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt-get update
+sudo apt-get install -y nodejs git
+node -v
+npm -v
+```
+
+3. Create a directory for the signaling service.
+
+```
+sudo mkdir -p /opt/dragos-signal
+sudo chown $USER:$USER /opt/dragos-signal
+cd /opt/dragos-signal
+```
+
+4. Copy the signal server script from this repo to the VPS.
+   Run the following on **your local machine** (replace user/IP as needed):
+
+```
+scp server/signal-server.js your-user@your-vps-ip:/opt/dragos-signal/signal-server.js
+```
+
+5. Install dependencies on the VPS.
+
+```
+cd /opt/dragos-signal
+npm init -y
+npm install socket.io
+```
+
+6. Optional: open the signaling port (default 4000) in UFW.
+
+```
+sudo ufw allow 4000/tcp
+```
+
+7. Start the signaling server (adjust CORS_ORIGIN to your frontend URL).
+
+```
+PORT=4000 \
+HOST=0.0.0.0 \
+CORS_ORIGIN=https://your-frontend-domain.com \
+NODE_ENV=production \
+node signal-server.js
+```
+
+8. (Optional) Keep the server running with PM2.
+
+```
+sudo npm install -g pm2
+pm2 start signal-server.js --name dragos-signal --cwd /opt/dragos-signal --update-env -- \
+  PORT=4000 HOST=0.0.0.0 CORS_ORIGIN=https://your-frontend-domain.com NODE_ENV=production
+pm2 save
+```
+
+The app expects `NEXT_PUBLIC_SIGNAL_SERVER_URL` (already added to `.env`) to point at `http://your-vps-ip:4000` (or the domain you expose). Update the value before deploying.
