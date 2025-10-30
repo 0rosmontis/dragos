@@ -37,7 +37,7 @@ export function Testimonials() {
             key={testimonial.name}
             className="flex h-full flex-col justify-between rounded-3xl border border-slate-900/60 bg-slate-950/40 p-6 text-left shadow-lg shadow-slate-950/30"
           >
-            <blockquote className="text-sm leading-relaxed text-slate-300">“{testimonial.quote}”</blockquote>
+            <blockquote className="text-sm leading-relaxed text-slate-300">"{testimonial.quote}"</blockquote>
             <figcaption className="mt-6">
               <p className="text-sm font-semibold text-slate-50">{testimonial.name}</p>
               <p className="text-xs text-slate-500">{testimonial.role}</p>

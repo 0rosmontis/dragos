@@ -9,7 +9,7 @@ const features = [
     icon: MessageSquare
   },
   {
-    title: 'Private & group rooms',
+    title: 'Private and group rooms',
     description: 'Spin up personal DMs or persistent team channels with access controls that fit your workflow.',
     icon: Users
   },
@@ -32,7 +32,7 @@ export function FeaturesGrid() {
         <p className="text-sm font-semibold uppercase tracking-wide text-brand.light">Why teams switch to Dragos</p>
         <h2 className="mt-2 text-3xl font-bold text-slate-50">Features built for everyday messaging</h2>
         <p className="mt-3 text-sm text-slate-400">
-          Real-time delivery, delightful UX, and smart productivity tools keep your conversations flowing.
+          Realtime delivery, delightful UX, and smart productivity tools keep your conversations flowing.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-2">
@@ -50,7 +50,7 @@ export function FeaturesGrid() {
                 <CardDescription>{feature.description}</CardDescription>
               </CardHeader>
               <CardContent>
-                <p className="text-xs text-slate-500">Unlimited rooms · Reliable delivery · Accessible UI</p>
+                <p className="text-xs text-slate-500">Unlimited rooms, reliable delivery, accessible UI.</p>
               </CardContent>
             </Card>
           );

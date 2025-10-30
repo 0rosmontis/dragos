@@ -74,7 +74,7 @@ export function SignInForm() {
         <PasswordInput
           id="password"
           autoComplete="current-password"
-          placeholder="••••••••"
+          placeholder="********"
           {...register('password')}
         />
         {errors.password ? (
@@ -83,7 +83,7 @@ export function SignInForm() {
       </div>
       {error ? <p className="text-sm text-red-400">{error}</p> : null}
       <Button type="submit" className="w-full" disabled={isSubmitting}>
-        {isSubmitting ? 'Signing in…' : 'Sign in'}
+        {isSubmitting ? 'Signing in...' : 'Sign in'}
       </Button>
     </form>
   );

@@ -20,7 +20,7 @@ export default async function DashboardPage() {
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-16">
       <section className="space-y-2">
-        <h1 className="text-3xl font-semibold">Hey {user.name ?? 'there'} 👋</h1>
+        <h1 className="text-3xl font-semibold">Hey {user.name ?? 'there'}!</h1>
         <p className="text-sm text-slate-400">Here&apos;s a snapshot of your latest private messages.</p>
       </section>
       <div className="grid gap-6 md:grid-cols-2">
@@ -36,9 +36,7 @@ export default async function DashboardPage() {
               messages.map((message) => (
                 <article key={message.id} className="rounded-lg border border-slate-800 bg-slate-900/60 p-4">
                   <p className="text-sm text-slate-200">{message.content}</p>
-                  <p className="mt-2 text-xs text-slate-500">
-                    {new Date(message.createdAt).toLocaleString()}
-                  </p>
+                  <p className="mt-2 text-xs text-slate-500">{new Date(message.createdAt).toLocaleString()}</p>
                 </article>
               ))
             )}

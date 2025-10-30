@@ -12,14 +12,14 @@ const conversation = [
     id: '2',
     sender: 'them',
     time: '09:33',
-    message: 'Absolutely! Let me just finish uploading the latest mockups and I’ll ping the team.',
+    message: "Absolutely! Let me finish uploading the latest mockups and I'll ping the team.",
     accent: 'from-slate-800 text-slate-200'
   },
   {
     id: '3',
     sender: 'you',
     time: '09:34',
-    message: 'Perfect. Drop the call link here and I’ll invite Alex as well ✨',
+    message: "Perfect. Drop the call link here and I'll invite Alex as well.",
     accent: 'from-brand/20 text-brand.light'
   },
   {
@@ -75,9 +75,9 @@ export function ConversationPreview() {
             </div>
           </div>
           <ul className="mt-4 space-y-2 text-sm">
-            <li>• Share screen and schedule recordings</li>
-            <li>• Sync notes directly into your chat</li>
-            <li>• Invite external guests securely</li>
+            <li>- Share screen and schedule recordings</li>
+            <li>- Sync notes directly into your chat</li>
+            <li>- Invite external guests securely</li>
           </ul>
         </div>
       </aside>

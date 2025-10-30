@@ -14,9 +14,9 @@ export default function SendMessagePage() {
         <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand/10 text-brand">
           <ShieldCheck className="h-6 w-6" />
         </div>
-        <h1 className="text-3xl font-semibold">Deliver a secure message</h1>
+        <h1 className="text-3xl font-semibold">Keep the conversation moving</h1>
         <p className="text-sm text-slate-400">
-          Share your thoughts anonymously or attach your details—Dragos keeps every message encrypted in transit.
+          Send quick updates or share longer plans--Dragos keeps every message encrypted while it travels.
         </p>
       </section>
       <Card>
