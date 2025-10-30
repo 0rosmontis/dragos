@@ -3,6 +3,7 @@
 import { z } from 'zod';
 
 import { prisma } from '@/lib/prisma';
+import { invalidateRecentMessages } from '@/lib/messages';
 
 const sendMessageSchema = z.object({
   recipientEmail: z.string().email('Please enter a valid recipient email'),
@@ -26,6 +27,8 @@ export async function sendMessageAction(input: SendMessageInput) {
       content: parsed.data.content
     }
   });
+
+  await invalidateRecentMessages(parsed.data.recipientEmail);
 
   return { success: true } as const;
 }

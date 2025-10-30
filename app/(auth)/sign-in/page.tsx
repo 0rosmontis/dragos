@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
 
 import { SignInForm } from '@/components/auth/sign-in-form';
@@ -15,7 +16,9 @@ export default function SignInPage() {
           Enter your credentials to access your secure messaging dashboard.
         </p>
       </div>
-      <SignInForm />
+      <Suspense fallback={<div className="text-center text-sm text-slate-400">Loading...</div>}>
+        <SignInForm />
+      </Suspense>
       <p className="text-center text-sm text-slate-400">
         Don&apos;t have an account?{' '}
         <Link href="/sign-up" className="font-medium text-brand hover:underline">

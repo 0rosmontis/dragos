@@ -1,10 +1,10 @@
 import { compare } from 'bcryptjs';
-import { NextAuthOptions, getServerSession } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import NextAuth, { NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 
 import { prisma } from '@/lib/prisma';
 
-export const authOptions: NextAuthOptions = {
+export const authConfig: NextAuthConfig = {
   session: {
     strategy: 'jwt'
   },
@@ -12,26 +12,29 @@ export const authOptions: NextAuthOptions = {
     signIn: '/sign-in'
   },
   providers: [
-    CredentialsProvider({
+    Credentials({
       name: 'Credentials',
       credentials: {
         email: { label: 'Email', type: 'text' },
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials) {
-        if (!credentials?.email || !credentials.password) {
+        const email = credentials?.email;
+        const password = credentials?.password;
+
+        if (!email || typeof email !== 'string' || !password || typeof password !== 'string') {
           throw new Error('Missing credentials');
         }
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email }
+          where: { email }
         });
 
         if (!user || !user.password) {
           throw new Error('Invalid email or password');
         }
 
-        const isValid = await compare(credentials.password, user.password);
+        const isValid = await compare(password, user.password);
         if (!isValid) {
           throw new Error('Invalid email or password');
         }
@@ -57,7 +60,9 @@ export const authOptions: NextAuthOptions = {
   }
 };
 
+export const { auth, handlers, signIn, signOut } = NextAuth(authConfig);
+
 export async function getCurrentUser() {
-  const session = await getServerSession(authOptions);
+  const session = await auth();
   return session?.user ?? null;
 }

@@ -2,7 +2,7 @@ import { redirect } from 'next/navigation';
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { getCurrentUser } from '@/lib/auth';
-import { prisma } from '@/lib/prisma';
+import { getRecentMessages } from '@/lib/messages';
 
 export const metadata = {
   title: 'My Dashboard | Dragos'
@@ -15,11 +15,7 @@ export default async function DashboardPage() {
     redirect('/sign-in');
   }
 
-  const messages = await prisma.message.findMany({
-    where: { recipientEmail: user.email },
-    orderBy: { createdAt: 'desc' },
-    take: 10
-  });
+  const messages = await getRecentMessages(user.email);
 
   return (
     <div className="mx-auto flex w-full max-w-4xl flex-col gap-8 px-6 py-16">
